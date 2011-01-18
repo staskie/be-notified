@@ -20,20 +20,16 @@ BeNotified::Monitor.new do
   
   configuration(options)
   
-  alert_when "number of files is greater then 5" do
+  alert_when "Clean your desktop." do
     number_of_files("/Users/dominik/Desktop") > 5
   end
   
-  alert_when "number of jpg files is greater then 2" do
+  alert_when "Number of jpg files on the desktop is greater then 2" do
     number_of_files("/Users/dominik/Desktop", /jpg/i) > 2
   end
   
-  alert_when "size of abc.txt if greater then 4" do
-    size_of_file("/Users/dominik/Desktop/abc.txt") > 4
-  end
-  
-  alert_when "Dock process is running" do
-    program_running?('dock')
+  alert_when "Size of abc.txt if greater then 4 KB" do
+    size_of_file("/Users/dominik/Desktop/abc.txt") > 4.KB
   end
   
   alert_when "Java prociess is not running" do
