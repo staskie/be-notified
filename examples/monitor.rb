@@ -4,21 +4,6 @@ require 'be_notified'
 
 
 BeNotified::Monitor.new do
-  options = {
-      :notifier_type => BeNotified::Notifiers::Email,
-      :email => {
-        :smtp_address => 'smtp.gmail.com',
-        :smtp_port    => 587,
-        :domain       => 'gmail.com',
-        :username     => 'login',
-        :password     => 'password',
-        :to           => 'to@email',
-        :from         => 'from@email',
-        :subject      => 'We have a problem'
-      }
-    }
-  
-  configuration(options)
   
   alert_when "Clean your desktop." do
     number_of_files("/Users/dominik/Desktop") > 5
