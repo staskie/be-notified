@@ -96,6 +96,11 @@ class TestConfiguration < Test::Unit::TestCase
     end
   end
   
+  def test_allow_having_multiple_notifiers
+    Configuration.options.merge!({:notifier_type => [BeNotified::Notifiers::Log, BeNotified::Notifiers::Email]})
+    assert Configuration.options[:notifier_type].is_a? Array
+  end
+  
   private
   
   def json_file_content

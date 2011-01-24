@@ -17,4 +17,10 @@ class TestNotifier < Test::Unit::TestCase
     Notifiers::Email.any_instance.expects(:notify).with("test email notifier")
     Notifier.new("Notifiers::Email", "test email notifier").notify
   end
+  
+  def test_multiple_notifiers
+      Notifiers::Log.any_instance.expects(:notify).with("Test multiple notifiers")
+      Notifiers::Email.any_instance.expects(:notify).with("Test multiple notifiers")
+      Notifier.new(["BeNotified::Notifiers::Log", "BeNotified::Notifiers::Email"], "Test multiple notifiers").notify
+  end
 end

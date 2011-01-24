@@ -69,11 +69,11 @@ Options can be set up in the three different ways:
 
 __First:__ By default program will log to standard output.
 
-__Second:__ Define properties directly in the code. An example of setting email notification:
+__Second:__ Define properties directly in the code. An example of setting logging and email notification:
 
 	BeNotified::Monitor.new do
 		custom_options = {
-			:notifier_type  => BeNotified::Notifiers::Email
+			:notifier_type  => [BeNotified::Notifiers::Log, BeNotified::Notifiers::Email]
 	    :email => {
 	      :smtp_address => 'localhost',
 	      :smtp_port    => 25,

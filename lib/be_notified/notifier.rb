@@ -6,12 +6,13 @@ module BeNotified
   class Notifier
     # Initializer requires two arguments:
     #
-    #  notifier_type - String or a Class represending notifier, can be:
+    #  notifier_types - String, Class or Array represending notifiers, can be:
     #                     BeNotified::Notifiers::Log (default)
     #                     BeNotified::Notifiers::Email
+    #                     [BeNotified::Notifiers::Log, BeNotified::Notifiers::Email]
     #  message - The String, message send to the user
-    def initialize(notifier_type, message)
-      @notifier = notifier_type.class ===  "String" ? eval("#{notifier_type}.new") : notifier_type.new
+    def initialize(notifier_types, message)
+      @notifier_types = notifier_types
       @message  = message
     end
     
@@ -24,7 +25,29 @@ module BeNotified
     #
     # Returns nothing
     def notify
-      @notifier.notify(@message)
+      notifiers.each do |notifier|
+        notifier.notify(@message)
+      end
+    end
+    
+    private
+    
+    def notifiers
+      notifiers = []
+      
+      if @notifier_types.kind_of? Array
+        @notifier_types.each do |notifier|
+          notifiers << get_notifier_type(notifier)
+        end
+      else
+        notifiers << get_notifier_type(@notifier_types)
+      end
+      
+      notifiers
+    end
+    
+    def get_notifier_type(notifier_type)
+      notifier_type.class ===  "String" ? eval("#{notifier_type}.new") : notifier_type.new
     end
   end
   

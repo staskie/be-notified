@@ -4,7 +4,6 @@ require 'be_notified'
 
 
 BeNotified::Monitor.new do
-  
   alert_when "Clean your desktop." do
     number_of_files("/Users/dominik/Desktop") > 5
   end
