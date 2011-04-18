@@ -7,7 +7,7 @@ This library monitors your programs or resources and notifies you by email or lo
 
 This gem is hosted on gemcutter.org
 
-	gem install be-notified
+	gem install benotified
 
 ## Usage
 
